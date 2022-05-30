@@ -29,5 +29,4 @@ jobs:
           rm package-lock.json
           ls -la
           npm install
-          # npm test:cov
-          # ls -la
+          npm test:cov
