@@ -1,0 +1,33 @@
+name: movie-boss-pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  buildAndTest:
+    name: CI Pipeline
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['14.x']
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+        env: # Or as an environment variable
+          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+          REACT_APP_TOKEN: ${{ secrets.REACT_APP_TOKEN }}
+      - name: Install dependencies and run tests
+        run: |
+          ls -la
+          rm package-lock.json
+          ls -la
+          npm install
+          # npm test:cov
+          # ls -la
