@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, ChangeEvent } from 'react';
+import { useState, useEffect, useRef, useCallback, ChangeEvent, lazy } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 
@@ -8,11 +8,11 @@ import { useGetMovies, useGetGenres } from '../fetcher';
 import { parseArrayToDictionary } from '../utils';
 import { Movie, Genre, FilterOptions, SearchOptions } from '../types';
 
-import SearchFilters from '@/components/searchfilter';
-import MovieList from '@/components/movielist';
-import Loader from '@/components/loader';
-import Alert from '@/components/alert';
-import InfiniteScroll from '@/components/infinite-scroll';
+const MovieList = lazy(() => import('@/components/movielist'));
+const Loader = lazy(() => import('@/components/loader'));
+const Alert = lazy(() => import('@/components/alert'));
+const InfiniteScroll = lazy(() => import('@/components/infinite-scroll'));
+const SearchFilters = lazy(() => import('@/components/searchfilter'));
 
 const ratingOptions: FilterOptions[] = [
     { id: 7.5, name: 7.5 },
